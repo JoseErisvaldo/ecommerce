@@ -1,0 +1,45 @@
+.card-profile {
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  max-width: 520px;
+  justify-content: space-between;
+  padding: 5px;
+}
+.card-dados {
+  width: 100%;
+  display: flex;
+}
+.card-img-profile {
+  background-color: rgb(216, 216, 216);
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+.btn-card {
+  margin-left: 20px;
+  background-color: #004cff;
+  color: white;
+  padding: 3px;
+  border: none;
+  width: 135px;
+  height: 35px;
+  border-radius: 20px;
+  cursor: pointer;
+}
+.card-menu {
+  font-size: 22px;
+  height: 35px;
+  color: #004cff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.card-menu div {
+  margin: 5px;
+}
