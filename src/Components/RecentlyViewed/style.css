@@ -1,0 +1,17 @@
+.card-viewed {
+  display: flex;
+  overflow-x: scroll;
+  width: 100%;
+}
+.card-stories {
+  margin: 5px;
+  width: 75px;
+  height: 75px;
+  border-radius: 100%;
+  background-color: rgb(202, 202, 202);
+  color: rgb(202, 202, 202);
+  text-align: center;
+}
+.card-viewed::-webkit-scrollbar {
+  background-color: rgb(255, 255, 255);
+}

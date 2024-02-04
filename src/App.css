@@ -1,0 +1,19 @@
+:root {
+  --color-blue: #004cff;
+  --color-green: #08c514;
+}
+.container-master {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: center;
+  align-items: center;
+}
+.container-response {
+  width: 50%;
+}
+
+@media (max-width: 660px) {
+  .container-response {
+    width: 95%;
+  }
+}

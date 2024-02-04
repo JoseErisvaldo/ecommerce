@@ -2,7 +2,7 @@
   margin: 10px;
   display: flex;
   align-items: center;
-  max-width: 520px;
+  width: 95%;
   justify-content: space-between;
   padding: 5px;
 }
@@ -22,7 +22,7 @@
 }
 .btn-card {
   margin-left: 20px;
-  background-color: #004cff;
+  background-color: var(--color-blue);
   color: white;
   padding: 3px;
   border: none;
@@ -34,7 +34,7 @@
 .card-menu {
   font-size: 22px;
   height: 35px;
-  color: #004cff;
+  color: var(--color-blue);
   display: flex;
   align-items: center;
   justify-content: space-between;

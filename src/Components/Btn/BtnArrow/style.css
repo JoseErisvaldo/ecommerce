@@ -1,0 +1,5 @@
+.card-arrow {
+  font-size: 30px;
+  color: var(--color-blue);
+  cursor: pointer;
+}

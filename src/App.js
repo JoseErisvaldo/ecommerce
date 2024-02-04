@@ -3,9 +3,11 @@ import AppRouter from './Router'
 
 function App() {
   return (
-    <>
-      <AppRouter />
-    </>
+    <div className="container-master">
+      <div className='container-response'>
+        <AppRouter />
+      </div>
+    </div>
   )
 }
 
