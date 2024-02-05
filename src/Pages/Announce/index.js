@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../../Components/Header'
 import './style.css'
 import { Link } from 'react-router-dom'
@@ -66,19 +66,23 @@ export default function Announce() {
     let barCode = e.target.value
     isBarCode(barCode)
   }
-
+  const [countSku, setCountSku] = useState([])
   async function loadingCatalago() {
     const { data, error } = await supabase.from('products').select('*')
-    console.log(data)
+    setCountSku(data)
   }
-  //loadingCatalago()
+  useEffect(() => {
+    loadingCatalago()
+  }, [])
+
+  const resCout = countSku.length
   async function cadCatalogo() {
     try {
       const { data, error } = await supabase
         .from('products')
         .insert([
           {
-            sku: 'SKU024',
+            sku: `SKU${resCout + 1}`,
             description: descriptionInput,
             idSeller: '1001',
             photo: 'fileInput',
