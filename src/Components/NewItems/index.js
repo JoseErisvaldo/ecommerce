@@ -2,8 +2,22 @@ import { Link } from 'react-router-dom'
 import BtnArrow from '../Btn/BtnArrow'
 import './style.css'
 import { FaArrowCircleRight } from 'react-icons/fa'
-
+import supabase from '../../supabaseClient'
+import { useEffect, useState } from 'react'
 export default function NewItems({ title, evento, link }) {
+  const [listItems, setitems] = useState([])
+  async function loadingItems() {
+    try {
+      const { data, error } = await supabase.from('products').select('*')
+      setitems(data)
+      console.log(data)
+    } catch (error) {
+      console.log('Erro' + error)
+    }
+  }
+  useEffect(() => {
+    loadingItems()
+  }, [])
   return (
     <div>
       <Link to={link}>
@@ -16,51 +30,15 @@ export default function NewItems({ title, evento, link }) {
         </div>
       </Link>
       <div id="container-items">
-        <div className="card-items">
-          <div className="card-item-img">
-            <img src="ads" alt="imagem" />
+        {listItems.map(item => (
+          <div className="card-items" key={item.sku}>
+            <div className="card-item-img">
+              <img src={item.photo} alt="imagem" />
+            </div>
+            <div className="description-item">{item.description}</div>
+            <div>R$ {item.price}</div>
           </div>
-          <div className="description-item">
-            Nameaaaasssssssssssssssssssssssssssssssssssssssssssssaaaaaaaaaassssssssssssssss
-          </div>
-          <div>R$ 70,00</div>
-        </div>
-        <div className="card-items">
-          <div className="card-item-img">
-            <img src="ads" alt="imagem" />
-          </div>
-          <div className="description-item">
-            Nameaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaassssssssssssssss
-          </div>
-          <div>R$ 70,00</div>
-        </div>
-        <div className="card-items">
-          <div className="card-item-img">
-            <img src="ads" alt="imagem" />
-          </div>
-          <div className="description-item">
-            Nameaaaaaaaaaaaaaassssssssssssssss
-          </div>
-          <div>R$ 70,00</div>
-        </div>
-        <div className="card-items">
-          <div className="card-item-img">
-            <img src="ads" alt="imagem" />
-          </div>
-          <div className="description-item">
-            Nameaaaaaaaaaaaaaassssssssssssssss
-          </div>
-          <div>R$ 70,00</div>
-        </div>
-        <div className="card-items">
-          <div className="card-item-img">
-            <img src="ads" alt="imagem" />
-          </div>
-          <div className="description-item">
-            Nameaaaaaaaaaaaaaassssssssssssssss
-          </div>
-          <div>R$ 70,00</div>
-        </div>
+        ))}
       </div>
     </div>
   )

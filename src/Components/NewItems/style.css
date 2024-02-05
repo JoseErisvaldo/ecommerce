@@ -17,21 +17,20 @@
   display: flex;
   overflow-x: scroll;
 }
+#container-items::-webkit-scrollbar {
+  background-color: white;
+}
 .card-items {
-  background-color: rgb(224, 225, 225);
-  width: 140px;
-  height: 204px;
   margin: 5px;
 }
-.card-item-img {
-  height: 130px;
-}
-.card-items img {
-  height: 130px;
+.card-item-img img {
+  height: 150px;
+  object-fit: contain;
 }
 .description-item {
   width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
   white-space: nowrap;
+  margin-bottom: 10px;
 }
