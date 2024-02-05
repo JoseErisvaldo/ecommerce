@@ -3,6 +3,7 @@ import { FaArrowCircleRight } from 'react-icons/fa'
 
 import NameUser from '../NameUser'
 import BtnArrow from '../Btn/BtnArrow'
+import { Link } from 'react-router-dom'
 
 export default function Announcement() {
   return (
@@ -15,7 +16,9 @@ export default function Announcement() {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
           hendrerit luctus libero ac vulputate.
         </div>
-        <BtnArrow dados={<FaArrowCircleRight />} />
+        <Link to={'/announce'}>
+          <BtnArrow dados={<FaArrowCircleRight />} />
+        </Link>
       </div>
     </div>
   )

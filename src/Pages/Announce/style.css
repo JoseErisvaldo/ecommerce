@@ -1,0 +1,36 @@
+.container-announce {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.card-dados-cad {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.cad-description,
+.cad-category,
+.cad-file,
+.cad-size,
+.cad-barcode,
+.cad-price {
+  text-align: center;
+  width: 100%;
+  border: 1px solid rgb(211, 211, 211);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 20px;
+  padding: 10px;
+}
+.btn-cad-products {
+  background-color: var(--color-blue);
+  width: 35%;
+  padding: 10px;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
