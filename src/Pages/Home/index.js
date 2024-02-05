@@ -4,6 +4,7 @@ import Header from '../../Components/Header'
 import NewItems from '../../Components/NewItems'
 import RecentlyViewed from '../../Components/RecentlyViewed'
 import StatusOrder from '../../Components/StatusOrder'
+import CategoryHome from '../../Components/CategoryHome'
 
 export default function Home() {
   return (
@@ -16,6 +17,11 @@ export default function Home() {
         title={'Novos produtos'}
         evento={'Ver mais'}
         link={'/newitems'}
+      />
+      <CategoryHome
+        title={'Categorias'}
+        evento={'Ver mais'}
+        link={'/category'}
       />
     </div>
   )

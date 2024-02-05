@@ -8,9 +8,8 @@ export default function NewItems({ title, evento, link }) {
   const [listItems, setitems] = useState([])
   async function loadingItems() {
     try {
-      const { data, error } = await supabase.from('products').select('*')
+      const { data, error } = await supabase.from('stock').select('*')
       setitems(data)
-      console.log(data)
     } catch (error) {
       console.log('Erro' + error)
     }
@@ -18,6 +17,9 @@ export default function NewItems({ title, evento, link }) {
   useEffect(() => {
     loadingItems()
   }, [])
+  const originlock = listItems.filter(item => item.blocked != true)
+  /// Tenho que adiconar um limite de exibição  e tenho que exibir novo, com base na data da criação !!!!
+
   return (
     <div>
       <Link to={link}>
@@ -29,8 +31,8 @@ export default function NewItems({ title, evento, link }) {
           </div>
         </div>
       </Link>
-      <div id="container-items">
-        {listItems.map(item => (
+      <div className="container-items">
+        {originlock.map(item => (
           <div className="card-items" key={item.sku}>
             <div className="card-item-img">
               <img src={item.photo} alt="imagem" />

@@ -12,12 +12,12 @@
 .see-all div {
   margin: 0 10px 0;
 }
-#container-items {
+.container-items {
   width: 100%;
   display: flex;
   overflow-x: scroll;
 }
-#container-items::-webkit-scrollbar {
+.container-items::-webkit-scrollbar {
   background-color: white;
 }
 .card-items {
