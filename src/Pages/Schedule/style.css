@@ -5,3 +5,12 @@
   align-items: center;
   width: 100%;
 }
+.select-option {
+  text-align: center;
+  width: 80%;
+  border: 1px solid rgb(211, 211, 211);
+  margin: 10px;
+  padding: 5px;
+  border-radius: 20px;
+  padding: 10px;
+}
