@@ -10,7 +10,20 @@ export default function Home() {
   return (
     <div>
       <Header />
-      <Announcement />
+      <Announcement
+        tittle={'Anunciar'}
+        descripton={
+          'Promova seus produtos de maneira simples e eficaz. Anuncie agora !!'
+        }
+        link={'/announce'}
+      />
+      <Announcement
+        tittle={'Agendar'}
+        descripton={
+          'Promova seus produtos de maneira simples e eficaz. Anuncie agora !!'
+        }
+        link={'/schedule'}
+      />
       <RecentlyViewed />
       <StatusOrder />
       <NewItems

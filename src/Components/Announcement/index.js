@@ -5,18 +5,15 @@ import NameUser from '../NameUser'
 import BtnArrow from '../Btn/BtnArrow'
 import { Link } from 'react-router-dom'
 
-export default function Announcement() {
+export default function Announcement({ tittle, descripton, link }) {
   return (
     <div className="card-announcement">
       <div className="announcement">
-        <h3>Anunciar</h3>
+        <h3>{tittle}</h3>
       </div>
       <div className="dados-announcement">
-        <div className="description-announcement">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
-          hendrerit luctus libero ac vulputate.
-        </div>
-        <Link to={'/announce'}>
+        <div className="description-announcement">{descripton}</div>
+        <Link to={link}>
           <BtnArrow dados={<FaArrowCircleRight />} />
         </Link>
       </div>
