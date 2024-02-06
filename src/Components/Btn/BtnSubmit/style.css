@@ -1,0 +1,15 @@
+.card-submit {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.btn-submit {
+  width: 30%;
+  background-color: var(--color-blue);
+  padding: 10px;
+  border-radius: 20px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
