@@ -1,0 +1,57 @@
+.container-login {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-login {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgb(223, 222, 222);
+  border-radius: 20px;
+  padding: 30px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
+
+input,
+label {
+  margin: 10px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.card-esq-cad {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.new-account:hover,
+.esqueci-senha:hover {
+  color: blue;
+  text-decoration: underline;
+}
+
+.become-advertiser {
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.become-advertiser span {
+  color: blue;
+  cursor: pointer;
+  text-decoration: underline;
+}
