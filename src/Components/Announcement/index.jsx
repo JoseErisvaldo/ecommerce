@@ -1,7 +1,6 @@
 import './style.css'
 import { FaArrowCircleRight } from 'react-icons/fa'
 
-import NameUser from '../NameUser'
 import BtnArrow from '../Btn/BtnArrow'
 import { Link } from 'react-router-dom'
 

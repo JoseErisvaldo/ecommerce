@@ -49,6 +49,7 @@ export default function Announce() {
   const onFile = e => {
     let onFile = e.target.files[0]
     setFileInput(onFile)
+    console.log(onFile)
   }
   const onSize = e => {
     let size = e.target.value
@@ -77,6 +78,7 @@ export default function Announce() {
 
   const resCout = countSku.length
   async function cadCatalogo() {
+    const url = 'https://kiexzvmtnrgrvlrjsbmp.supabase.co/storage/v1/object/public/imagensitems/'
     try {
       const { data, error } = await supabase
         .from('products')
@@ -85,7 +87,7 @@ export default function Announce() {
             sku: `SKU${resCout + 1}`,
             description: descriptionInput,
             idSeller: '1001',
-            photo: 'fileInput',
+            photo: url + fileInput.name,
             size: sizeInput,
             category: categoryInput,
             status: 'Ativo',
@@ -94,6 +96,11 @@ export default function Announce() {
           }
         ])
         .select()
+
+      const {dataImg, errorImg} = await supabase.storage
+      .from('imagensitems')
+      .upload(fileInput.name, fileInput)
+
       setDescriptionInput('')
       setCategoryInput('')
       setFileInput('')

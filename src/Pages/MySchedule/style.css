@@ -1,0 +1,54 @@
+.card-schedule {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+}
+.aguardando-coleta,
+.rota-entrega,
+.aguardando-desembarque,
+.em-conferencia,
+.disponivel-entrega,
+.total-agendas {
+  font-weight: 600;
+  width: 130px;
+  height: 75px;
+  text-align: center;
+  border: 1px solid rgb(220, 220, 220);
+  margin: 3px;
+  padding: 5px;
+  margin-bottom: 20px;
+}
+
+.container-table-schedule {
+  overflow: scroll;
+  width: 100%;
+  height: 550px;
+}
+.container-table-schedule::-webkit-scrollbar {
+  background-color: white;
+}
+.container-my-schedule {
+  border: 1px solid rgb(218, 218, 218);
+}
+.container-my-schedule thead tr th,
+.container-my-schedule tbody tr td {
+  text-align: center;
+  border: 1px solid rgb(237, 237, 237);
+  padding: 5px;
+}
+table {
+  border-collapse: collapse;
+  border: 1px solid rgb(237, 237, 237);
+}
+
+@media (max-width: 330px) {
+  .card-schedule {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
