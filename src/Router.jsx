@@ -11,24 +11,26 @@ import PageLogin from './Pages/Login'
 import React, { useContext } from 'react'
 
 import { AuthProvider, AuthContext } from './Contexts/Login'
+import Cart from './Pages/Cart'
 
 export default function AppRouter() {
 
   const AdminPrivate = ({ children }) => {
     const { autenticado, loading } = useContext(AuthContext);
 
-    if (loading) {
+    if (loading ) {
       return <div className='loading'> Carregando...</div>
     }
   
     if (!autenticado) {
       return <Navigate to="/login" />;
     }
+
   
     return children;
   };
-  
 
+  
   return (
     <BrowserRouter>
       <AuthProvider>
@@ -38,11 +40,12 @@ export default function AppRouter() {
           <Route path="/" element={ <AdminPrivate><Home /> </AdminPrivate> } />
           {/*essa rota sera acessado somente para os clientes*/}
           <Route path="/category" element={<Category />} />
+          <Route path='/cart' element ={<Cart/>} />
 
           {/*essa rota sera acessado somente os seller*/}
           <Route path="/announce" element={<Announce />} />
           {/*essa rota sera acessado somente os seller*/}
-          <Route path="/schedule" element={<Schedule />} />
+          <Route path="/schedule" element={ <AdminPrivate><Schedule /> </AdminPrivate>} />
           {/*essa rota sera acessado somente os seller*/}
           <Route path='/myschedule' element={<MySchedule/>} />
           
