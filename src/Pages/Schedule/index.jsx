@@ -2,25 +2,24 @@ import Header from '../../Components/Header'
 import { Link } from 'react-router-dom'
 import BtnArrow from '../../Components/Btn/BtnArrow'
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
-import {
-  DescriptionInput,
-  NumberInput,
-  SelectInput
-} from '../../Components/Inputs'
+import { NumberInput } from '../../Components/Inputs'
 import './style.css'
 import BtnSubmit from '../../Components/Btn/BtnSubmit'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import supabase from '../../supabaseClient'
 import Announcement from '../../Components/Announcement'
 
+import { AuthContext } from '../../Contexts/Login'
+
 
 export default function Schedule() {
-  const idSeller = 1001
+  const { user } = useContext(AuthContext);
   let [sku, setSku] = useState('')
   let [qtd, setQtd] = useState('')
   let [priceBd, setPrice] = useState('')
   const [products, setProducts] = useState([])
   const [schedule, setSchedule] = useState([])
+  const [users, setUsers] = useState([])
 
   async function loadingProducts() {
     const { data, error } = await supabase.from('products').select('*')
@@ -32,23 +31,35 @@ export default function Schedule() {
     setSchedule(data)
   }
 
+  async function loadingUser () {
+    try {
+      const {data, error} = await supabase.from('users').select('*').eq("email" ,user.email)
+      setUsers(data)
+    } catch (error) {
+      console.log(error)
+    }
+   
+  }
+
   useEffect(() => {
     loadingProducts()
     loadingSchedule()
+    loadingUser ()
   }, [])
+  const filterUser = users.map(item => {
+    return item.id
+  })
   const lengthSchedule = schedule.length
-  let array = products.filter(item => item.idSeller == idSeller)
+  let array = products.filter(item => item.idSeller == filterUser[0])
 
   function selectOption(e) {
     setSku(e.target.value)
-    console.log(e.target.value)
     const filterSkuPrice = products
       .filter(item => item.sku === e.target.value)
       .map(price => {
         return price.price
       })
     setPrice(filterSkuPrice)
-    console.log(filterSkuPrice)
   }
 
   async function agendar() {
@@ -64,11 +75,11 @@ export default function Schedule() {
             sku: sku,
             ammount: qtd,
             price: 12,
-            idSeller: idSeller
+            idSeller: filterUser[0],
+            status: 'Aguardando Aprovação para Coleta'
           }
         ])
         .select()
-      console.log(data)
     } catch (error) {
       console.log(error)
     }

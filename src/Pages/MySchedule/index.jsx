@@ -4,9 +4,15 @@ import BtnArrow from "../../Components/Btn/BtnArrow"
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
 import './style.css'
 import supabase from "../../supabaseClient"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useContext } from "react"
+
+
+import { AuthContext } from '../../Contexts/Login'
+
 export default function MySchedule () {
-  const idSeller = 1001
+  const { user } = useContext(AuthContext);
+  console.log('context', user)
+  const [seller, setSeller] = useState([])
   const [listSchedule, setSchedule] = useState([])
   async function loadingSchedule () {
     try {
@@ -18,23 +24,45 @@ export default function MySchedule () {
       console.log(`Eror na chamada, ${error}`)
     }
   }
+  async function loadingUser () {
+    if(user && user.email) {
+      try {
+        const {data, error} = await supabase.from('users').select('*').eq("email" ,user.email)
+        setSeller(data)
+        console.log (data)
+      } catch (error) {
+        console.log (error)
+      }
+    }
+    
+  }
   useEffect(() => {
     loadingSchedule ()
-  },[])
+    loadingUser ()
+  },[user])
 
-  const resSeller = listSchedule.filter(item => item.idSeller == idSeller)
+  const idSeller = seller.map(item => {
+    return item.id
+  })
 
-  const countStatusColeta = resSeller.filter(item => item.status === '  Aguardando Coleta' ).length
+  if(user && user.email) {
+    
+  }
+  const resSeller = listSchedule.filter(item => item.idSeller == idSeller[0])
+  
+  const countStatusAprovacao = resSeller.filter(item => item.status === 'Aguardando Aprovação para Coleta' ).length
+
+  const countStatusColeta = resSeller.filter(item => item.status === 'Aguardando Coleta' ).length
+
   const countStatusRota = resSeller.filter(item => item.status === 'Rota de Entrega' ).length
 
   const countStatusDesembarque = resSeller.filter(item => item.status === 'Aguardando Desembarque' ).length
 
   const countStatusConferencia = resSeller.filter(item => item.status === 'Em Conferencia' ).length
 
-  const countStatusFinalizado = resSeller.filter(item => item.status === 'Em Conferencia' ).length
+  const countStatusFinalizado = resSeller.filter(item => item.status === 'Finalizado' ).length
 
   const countStatusTotal = resSeller.length
-  console.log(countStatusTotal)
 
   const convertResSeller = resSeller.map(item => {
     const dateAgendado = new Date(item.dateScheduling);
@@ -59,6 +87,10 @@ export default function MySchedule () {
       </Link>
       <h1>Gerenciar meus agendamentos</h1>
       <div className="card-schedule">
+        <div className="aguardando-coleta">
+           <div>Aguardando Aprovação</div>
+          <div>{countStatusAprovacao}</div>
+        </div>
         <div className="aguardando-coleta">
           <div>Aguardando Coleta</div>
           <div>{countStatusColeta}</div>
