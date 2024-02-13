@@ -11,7 +11,6 @@ export default function Header() {
   const handelLogout = () => {
     logout()
   }
-
   return (
     <div>
       <div className="card-profile">
