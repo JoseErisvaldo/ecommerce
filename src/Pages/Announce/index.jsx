@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Header from '../../Components/Header'
 import './style.css'
 import { Link } from 'react-router-dom'
@@ -6,7 +6,11 @@ import { FaArrowAltCircleLeft } from 'react-icons/fa'
 import BtnArrow from '../../Components/Btn/BtnArrow'
 import supabase from '../../supabaseClient'
 
+import { AuthContext } from '../../Contexts/Login'
+
 export default function Announce() {
+  const {user} = useContext(AuthContext)
+  const [seller, setSeller] = useState([])
   let [descriptionInput, setDescriptionInput] = useState('')
   let [categoryInput, setCategoryInput] = useState('')
   let [fileInput, setFileInput] = useState('')
@@ -14,6 +18,22 @@ export default function Announce() {
   let [barCode, setBarCodeInput] = useState('')
   let [valor, setValor] = useState('')
   let [numeroFormatado, setNumeroFormatado] = useState('')
+
+  async function loadingUser () {
+    if(user) {
+      try {
+        const {data, error} = await supabase
+        .from('users')
+        .select('*')
+        .eq('email' , user.email)
+        setSeller(data)
+      } catch (error) {
+        console.log(error)
+      }
+      
+    }
+    
+  }  
 
   const formatarNumero = valor => {
     let numero = parseFloat(valor.replace(',', '.'))
@@ -72,9 +92,15 @@ export default function Announce() {
     const { data, error } = await supabase.from('products').select('*')
     setCountSku(data)
   }
+
+  const idSeller = seller.map(id => {
+    return id.id
+  })
+
   useEffect(() => {
     loadingCatalago()
-  }, [])
+    loadingUser ()
+  }, [user])
 
   const resCout = countSku.length
   async function cadCatalogo() {
@@ -86,8 +112,8 @@ export default function Announce() {
           {
             sku: `SKU${resCout + 1}`,
             description: descriptionInput,
-            idSeller: '1001',
-            photo: url + fileInput.name,
+            idSeller: idSeller[0],
+            photo: url + idSeller[0] + '_' + fileInput.name,
             size: sizeInput,
             category: categoryInput,
             status: 'Ativo',
@@ -99,7 +125,7 @@ export default function Announce() {
 
       const {dataImg, errorImg} = await supabase.storage
       .from('imagensitems')
-      .upload(fileInput.name, fileInput)
+      .upload(idSeller[0] + '_' + fileInput.name, fileInput)
 
       setDescriptionInput('')
       setCategoryInput('')
