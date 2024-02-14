@@ -10,6 +10,7 @@ export default function CategoryHome({ title, evento, link }) {
     try {
       const { data, error } = await supabase.from('stock').select('*')
       setitems(data)
+      console.log(data)
     } catch (error) {
       console.log('Erro' + error)
     }
@@ -37,6 +38,7 @@ export default function CategoryHome({ title, evento, link }) {
     })
     .slice(0, 4)
   const countoriginlockSapatos = originlockSapatos.length
+  console.log(countoriginlockSapatos)
 
   const originlockBermudas = listItems.filter(item => {
     return item.blocked != true && item.category === 'Bermudas'
@@ -53,14 +55,14 @@ export default function CategoryHome({ title, evento, link }) {
   })
   const originlockAcessoriosSlice = listItems
     .filter(item => {
-      return item.blocked != true && item.category === 'Bermudas'
+      return item.blocked != true && item.category === 'Acessorios'
     })
     .slice(0, 4)
   const countoriginlockAcessorios = originlockAcessorios.length
 
   return (
     <div>
-      <Link to={link}>
+      <Link className='link' to={link}>
         <div className="title-card">
           <h3>{title}</h3>
           <div className="see-all">
@@ -69,67 +71,99 @@ export default function CategoryHome({ title, evento, link }) {
           </div>
         </div>
       </Link>
+      
       <div className="container-category-home">
-        <div className="container-card-category-home">
-          <div className="card-category-home">
-            {originlockRoupasSlice.map(category => (
-              <div className="category-img-home" key={category.sku}>
-                <img src={category.photo} />
+      {originlockRoupasSlice.length > 0 ?
+        <>
+          <div className="container-card-category-home">
+            <div className="card-category-home">
+              {originlockRoupasSlice.map(category => (
+                <div className="category-img-home" key={category.sku}>
+                  <img src={category.photo} />
+                </div>
+              ))}
+            </div>
+            {originlockRoupas.slice(0, 1).map(category => (
+              <div className="tittle-category-home" key={category.category}>
+                <div className="name-category">{category.category}</div>
+                <div className="category-count">{countoriginlockRoupas}</div>
+              </div>
+            ))}
+        </div>
+        </>  
+        :
+        <>
+        
+        </>  
+      }
+        {originlockSapatosSlice.length > 0 ? 
+          <> 
+            <div className="container-card-category-home">
+            <div className="card-category-home">
+              {originlockSapatosSlice.map(category => (
+                <div className="category-img-home" key={category.sku}>
+                  <img src={category.photo} />
+                </div>
+              ))}
+            </div>
+            {originlockSapatos.slice(0, 1).map(category => (
+              <div className="tittle-category-home" key={category.category}>
+                <div className="name-category">{category.category}</div>
+                <div className="category-count">{countoriginlockSapatos}</div>
               </div>
             ))}
           </div>
-          {originlockRoupas.slice(0, 1).map(category => (
-            <div className="tittle-category-home" key={category.category}>
-              <div className="name-category">{category.category}</div>
-              <div className="category-count">{countoriginlockRoupas}</div>
-            </div>
-          ))}
-        </div>
-        <div className="container-card-category-home">
-          <div className="card-category-home">
-            {originlockSapatosSlice.map(category => (
-              <div className="category-img-home" key={category.sku}>
-                <img src={category.photo} />
+          </> 
+            : 
+          <>
+           
+          </>
+        }
+        {originlockBermudasSlice.length > 0 ? 
+          <>
+            <div className="container-card-category-home">
+              <div className="card-category-home">
+                {originlockBermudasSlice.map(category => (
+                  <div className="category-img-home" key={category.sku}>
+                    <img src={category.photo} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {originlockSapatos.slice(0, 1).map(category => (
-            <div className="tittle-category-home" key={category.category}>
-              <div className="name-category">{category.category}</div>
-              <div className="category-count">{countoriginlockSapatos}</div>
+              {originlockBermudas.slice(0, 1).map(category => (
+                <div className="tittle-category-home" key={category.category}>
+                  <div className="name-category">{category.category}</div>
+                  <div className="category-count">{countoriginlockBermudas}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="container-card-category-home">
-          <div className="card-category-home">
-            {originlockBermudasSlice.map(category => (
-              <div className="category-img-home" key={category.sku}>
-                <img src={category.photo} />
+          </> 
+          : 
+          <>
+          
+          </>
+        }
+        {originlockAcessoriosSlice.length > 0 ?
+          <>
+            <div className="container-card-category-home">
+              <div className="card-category-home">
+                {originlockAcessoriosSlice.map(category => (
+                  <div className="category-img-home" key={category.sku}>
+                    <img src={category.photo} />
+                  </div>
+                ))}
               </div>
-            ))}
-          </div>
-          {originlockBermudas.slice(0, 1).map(category => (
-            <div className="tittle-category-home" key={category.category}>
-              <div className="name-category">{category.category}</div>
-              <div className="category-count">{countoriginlockBermudas}</div>
+              {originlockAcessorios.slice(0, 1).map(category => (
+                <div className="tittle-category-home" key={category.category}>
+                  <div className="name-category">{category.category}</div>
+                  <div className="category-count">{countoriginlockAcessorios}</div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-        <div className="container-card-category-home">
-          <div className="card-category-home">
-            {originlockAcessoriosSlice.map(category => (
-              <div className="category-img-home" key={category.sku}>
-                <img src={category.photo} />
-              </div>
-            ))}
-          </div>
-          {originlockAcessorios.slice(0, 1).map(category => (
-            <div className="tittle-category-home" key={category.category}>
-              <div className="name-category">{category.category}</div>
-              <div className="category-count">{countoriginlockAcessorios}</div>
-            </div>
-          ))}
-        </div>
+          </>
+          :
+          <></>
+        }
+        
       </div>
     </div>
   )
