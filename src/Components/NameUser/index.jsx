@@ -3,8 +3,12 @@ import React, {useContext, useEffect, useState} from 'react'
 import { AuthContext } from '../../Contexts/Login'
 import supabase from '../../supabaseClient'
 export default function NameUser() {
-  const {user} = useContext(AuthContext)
+  const {user, userData} = useContext(AuthContext)
   const [userBd, setUserBd] =useState([])
+
+  console.log(userData)
+
+  
   async function loadingUser () {
     const {data, error} = await supabase
     .from('users')
@@ -19,7 +23,8 @@ export default function NameUser() {
 
   return (
     <div className="card-name-user">
-      <h1>Olá,  {resFilter ? resFilter.nameUser : 'User Desconhecido !!' }</h1>
+      {String(userData)}
+      <h1>Olá,  {resFilter ? resFilter.nameUser : '' }</h1>
     </div>
   )
 }
