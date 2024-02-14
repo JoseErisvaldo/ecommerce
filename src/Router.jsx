@@ -12,12 +12,14 @@ import React, { useContext } from 'react'
 
 import { AuthProvider, AuthContext } from './Contexts/Login'
 import Cart from './Pages/Cart'
+import Stock from './Components/Stock'
+import HomeClient from './Pages/HomeClient'
+import HomeSeller from './Pages/HomeSeller'
 
 export default function AppRouter() {
 
   const AdminPrivate = ({ children }) => {
-    const { autenticado, loading, userData } = useContext(AuthContext);
-    console.log(userData)
+    const { autenticado, loading, userData, userSeller } = useContext(AuthContext);
     if (loading ) {
       return <div className='loading'> Carregando...</div>
     }
@@ -25,6 +27,15 @@ export default function AppRouter() {
     if (!autenticado) {
       return <Navigate to="/login" />;
     }
+
+
+    if(autenticado && userData === false && userSeller === false) {
+      return <Navigate to="/homeclient"/>
+    }
+    if(autenticado && userData === false && userSeller === true) {
+      return <Navigate to="/homeseller"/>
+    }
+
     return children;
   };
 
@@ -35,15 +46,18 @@ export default function AppRouter() {
       <Routes>
           <Route exact path='/login' element={<PageLogin/>} />
 
-          <Route path="/" element={ <AdminPrivate><Home /> </AdminPrivate> } />
+          <Route path="/" element={ <AdminPrivate> <Home /> </AdminPrivate> } />
           {/*essa rota sera acessado somente para os clientes*/}
           <Route path="/category" element={<Category />} />
           <Route path='/cart' element ={<Cart/>} />
+          <Route path='/homeclient' element={ <HomeClient/>} />
 
           {/*essa rota sera acessado somente os seller*/}
           <Route path="/announce" element={<Announce />} />
-          <Route path="/schedule" element={ <AdminPrivate><Schedule /> </AdminPrivate>} />
+          <Route path="/schedule" element={ <Schedule /> } />
+          <Route path='/homeseller' element={<HomeSeller/> } />
           <Route path='/myschedule' element={<MySchedule/>} />
+          <Route path='/stock' element={<Stock/>} />
           
           {/*essa rota sera acessado somente para colaboradores da empresa*/}
           <Route path='/receiveschedules' element={<ReceiveSchedules/>} /> 
