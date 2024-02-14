@@ -11,7 +11,6 @@ import { AuthContext } from '../../Contexts/Login'
 
 export default function MySchedule () {
   const { user } = useContext(AuthContext);
-  console.log('context', user)
   const [seller, setSeller] = useState([])
   const [listSchedule, setSchedule] = useState([])
   async function loadingSchedule () {
@@ -29,7 +28,6 @@ export default function MySchedule () {
       try {
         const {data, error} = await supabase.from('users').select('*').eq("email" ,user.email)
         setSeller(data)
-        console.log (data)
       } catch (error) {
         console.log (error)
       }
@@ -82,7 +80,7 @@ export default function MySchedule () {
   return(
     <div>
       <Header />
-      <Link to={'/schedule'}>
+      <Link to={'/'}>
         <BtnArrow dados={<FaArrowAltCircleLeft />} />
       </Link>
       <h1>Gerenciar meus agendamentos</h1>
