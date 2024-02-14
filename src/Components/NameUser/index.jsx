@@ -6,8 +6,6 @@ export default function NameUser() {
   const {user, userData} = useContext(AuthContext)
   const [userBd, setUserBd] =useState([])
 
-  console.log(userData)
-
   
   async function loadingUser () {
     const {data, error} = await supabase

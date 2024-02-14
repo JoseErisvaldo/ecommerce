@@ -22,7 +22,7 @@ export default function NewItems({ title, evento, link }) {
 
   return (
     <div>
-      <Link to={link}>
+      <Link  className='link' to={link}>
         <div className="title-card">
           <h3>{title}</h3>
           <div className="see-all">
