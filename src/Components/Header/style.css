@@ -20,6 +20,10 @@
   justify-content: center;
   cursor: pointer;
 }
+.card-img-profile img {
+  width: 100%;
+  border-radius: 20px;
+}
 .btn-card {
   margin-left: 20px;
   background-color: var(--color-blue);
