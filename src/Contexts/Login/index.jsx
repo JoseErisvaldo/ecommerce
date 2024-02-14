@@ -13,10 +13,13 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const recoveredUser = localStorage.getItem("user");
+    const recoveredUser = localStorage.getItem("user")
+    const recoveredAdmin = localStorage.getItem("admin");
 
-    if (recoveredUser) {
+
+    if (recoveredUser && recoveredAdmin) {
       setUser(JSON.parse(recoveredUser));
+      setUserData(JSON.parse(recoveredAdmin))
     }
 
     setLoading(false);
@@ -36,18 +39,11 @@ export const AuthProvider = ({ children }) => {
         .select("*")
         .eq("email", resUser.email);
   
-      if (error) {
-        console.error("Error loading user data:", error);
-      } else if (data && data.length > 0) {
         setUserData(data[0]?.admin);
-        console.log(data[0]?.admin);
-      } else {
-        console.warn("User not found in the database.");
-      }
   
       localStorage.setItem("user", JSON.stringify(resUser));
       localStorage.setItem('admin', JSON.stringify(data[0]?.admin))
-      navigate("/");
+      navigate("/")
     } catch (error) {
       console.error("Error during login:", error);
     }
@@ -57,6 +53,7 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
     setUserData(null); 
     localStorage.removeItem("user");
+    localStorage.removeItem("admin")
     navigate("/login");
   };
 
