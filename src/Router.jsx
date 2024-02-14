@@ -16,8 +16,8 @@ import Cart from './Pages/Cart'
 export default function AppRouter() {
 
   const AdminPrivate = ({ children }) => {
-    const { autenticado, loading } = useContext(AuthContext);
-
+    const { autenticado, loading, userData } = useContext(AuthContext);
+    console.log(userData)
     if (loading ) {
       return <div className='loading'> Carregando...</div>
     }
@@ -25,8 +25,6 @@ export default function AppRouter() {
     if (!autenticado) {
       return <Navigate to="/login" />;
     }
-
-  
     return children;
   };
 
@@ -44,9 +42,7 @@ export default function AppRouter() {
 
           {/*essa rota sera acessado somente os seller*/}
           <Route path="/announce" element={<Announce />} />
-          {/*essa rota sera acessado somente os seller*/}
           <Route path="/schedule" element={ <AdminPrivate><Schedule /> </AdminPrivate>} />
-          {/*essa rota sera acessado somente os seller*/}
           <Route path='/myschedule' element={<MySchedule/>} />
           
           {/*essa rota sera acessado somente para colaboradores da empresa*/}
