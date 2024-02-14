@@ -1,6 +1,8 @@
 :root {
   --color-blue: #004cff;
   --color-green: #08c514;
+  --color-white: #ffffff;
+  --color-red: red;
 }
 .container-master {
   display: flex;
