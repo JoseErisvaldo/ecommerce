@@ -7,7 +7,7 @@ import './style.css'
 import BtnSubmit from '../../Components/Btn/BtnSubmit'
 import { useEffect, useState, useContext } from 'react'
 import supabase from '../../supabaseClient'
-import Announcement from '../../Components/Announcement'
+import Announcement from '../../Components/Cards'
 
 import { AuthContext } from '../../Contexts/Login'
 

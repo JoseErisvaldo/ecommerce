@@ -1,5 +1,5 @@
 import Header from "../../Components/Header"
-import Announcement from "../../Components/Announcement"
+import Announcement from "../../Components/Cards"
 
 
 export default function ReceiveSchedules () {
