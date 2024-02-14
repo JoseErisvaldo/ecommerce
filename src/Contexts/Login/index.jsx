@@ -10,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [userSeller, setSeller] = useState(null)
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -33,13 +34,13 @@ export const AuthProvider = ({ children }) => {
   
       setUser(resUser);
   
-      // Carrega os dados do usuário do banco de dados após o login
       const { data, error } = await supabase
         .from("users")
         .select("*")
         .eq("email", resUser.email);
   
         setUserData(data[0]?.admin);
+        setSeller(data[0]?.seller)
   
       localStorage.setItem("user", JSON.stringify(resUser));
       localStorage.setItem('admin', JSON.stringify(data[0]?.admin))
@@ -59,7 +60,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ autenticado: !!user, user, userData, login, loading, logout }}
+      value={{ autenticado: !!user, user, userData, login, loading, logout, userSeller }}
     >
       {children}
     </AuthContext.Provider>
