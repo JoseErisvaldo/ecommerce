@@ -18,5 +18,38 @@
   background-color: white;
 }
 .dados-stock {
-  height: 100vh;
+  overflow-x: scroll;
+  width: 95%;
+}
+.container-card-stock {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.stock-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.stock-table th,
+.stock-table td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.stock-table thead {
+  background-color: #f4f4f4;
+}
+
+.stock-table tbody tr:hover {
+  background-color: #f9f9f9;
+}
+
+.img-stock img {
+  width: 50px; /* Adjust the width of the image as needed */
+  height: auto;
 }

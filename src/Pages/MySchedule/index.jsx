@@ -16,9 +16,9 @@ export default function MySchedule () {
   async function loadingSchedule () {
     try {
       const {data, error} = await supabase
-    .from('schedule')
-    .select('*')
-    setSchedule(data)
+      .from('schedule')
+      .select('*')
+      setSchedule(data)
     } catch (error) {
       console.log(`Eror na chamada, ${error}`)
     }
