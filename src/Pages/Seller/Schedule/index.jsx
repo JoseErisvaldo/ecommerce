@@ -1,15 +1,14 @@
-import Header from '../../Components/Header'
+import Header from '../../../Components/Header'
 import { Link } from 'react-router-dom'
-import BtnArrow from '../../Components/Btn/BtnArrow'
+import BtnArrow from '../../../Components/Btn/BtnArrow'
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
-import { NumberInput } from '../../Components/Inputs'
+import { NumberInput } from '../../../Components/Inputs'
 import './style.css'
-import BtnSubmit from '../../Components/Btn/BtnSubmit'
+import BtnSubmit from '../../../Components/Btn/BtnSubmit'
 import { useEffect, useState, useContext } from 'react'
-import supabase from '../../supabaseClient'
-import Announcement from '../../Components/Cards'
-
-import { AuthContext } from '../../Contexts/Login'
+import supabase from '../../../supabaseClient'
+import Announcement from '../../../Components/Cards'
+import { AuthContext } from '../../../Contexts/Login'
 
 
 export default function Schedule() {
@@ -87,7 +86,7 @@ export default function Schedule() {
   return (
     <div>
       <Header />
-      <Link to={'/'}>
+      <Link to={'/homeseller'}>
         <BtnArrow dados={<FaArrowAltCircleLeft />} />
       </Link>
       <div className="container-inputs-schedule">

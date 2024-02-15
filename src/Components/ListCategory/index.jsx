@@ -44,15 +44,16 @@ export default function ListCategory () {
           Sapatos
         </li>
       </ul>
+      <h4>Selecionar Tamanhos</h4>
       <ul className='genero-category'>
         <li className='genero-category'>
             Todos
         </li>
         <li>
-          Masculino
+          P
         </li>
         <li className='genero-category'>
-          Feminino
+          PP
         </li>
       </ul>
     </div>

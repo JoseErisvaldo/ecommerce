@@ -1,13 +1,11 @@
-import Header from "../../Components/Header"
+import Header from "../../../Components/Header"
 import { Link } from "react-router-dom"
-import BtnArrow from "../../Components/Btn/BtnArrow"
+import BtnArrow from "../../../Components/Btn/BtnArrow"
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
 import './style.css'
-import supabase from "../../supabaseClient"
+import supabase from "../../../supabaseClient"
 import { useEffect, useState, useContext } from "react"
-
-
-import { AuthContext } from '../../Contexts/Login'
+import { AuthContext } from '../../../Contexts/Login'
 
 export default function MySchedule () {
   const { user } = useContext(AuthContext);
@@ -80,7 +78,7 @@ export default function MySchedule () {
   return(
     <div>
       <Header />
-      <Link to={'/'}>
+      <Link to={'/homeseller'}>
         <BtnArrow dados={<FaArrowAltCircleLeft />} />
       </Link>
       <h1>Gerenciar meus agendamentos</h1>

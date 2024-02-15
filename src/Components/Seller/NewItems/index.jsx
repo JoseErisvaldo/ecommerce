@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import BtnArrow from '../Btn/BtnArrow'
+import BtnArrow from '../../Btn/BtnArrow'
 import './style.css'
 import { FaArrowCircleRight } from 'react-icons/fa'
-import supabase from '../../supabaseClient'
+import supabase from '../../../supabaseClient'
 import { useEffect, useState } from 'react'
 export default function NewItems({ title, evento, link }) {
   const [listItems, setitems] = useState([])

@@ -1,15 +1,15 @@
 import { useContext, useEffect, useState } from 'react'
-import Header from '../../Components/Header'
+import Header from '../../../Components/Header'
 import './style.css'
 import { Link } from 'react-router-dom'
 import { FaArrowAltCircleLeft } from 'react-icons/fa'
-import BtnArrow from '../../Components/Btn/BtnArrow'
-import supabase from '../../supabaseClient'
+import BtnArrow from '../../../Components/Btn/BtnArrow'
+import supabase from '../../../supabaseClient'
 
-import { AuthContext } from '../../Contexts/Login'
+import { AuthContext } from '../../../Contexts/Login'
 
 export default function Announce() {
-  const {user} = useContext(AuthContext)
+  const {user, autenticado, userData, userSeller} = useContext(AuthContext)
   const [seller, setSeller] = useState([])
   let [descriptionInput, setDescriptionInput] = useState('')
   let [categoryInput, setCategoryInput] = useState('')
@@ -139,10 +139,12 @@ export default function Announce() {
       console.log(error)
     }
   }
+
   return (
     <>
       <Header />
-      <Link to={'/'}>
+      
+      <Link to={'/homeseller'}>
         <BtnArrow dados={<FaArrowAltCircleLeft />} />
       </Link>
 

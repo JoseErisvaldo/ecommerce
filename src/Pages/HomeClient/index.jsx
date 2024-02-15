@@ -1,6 +1,5 @@
-import Cards from '../../Components/Cards'
 import Header from '../../Components/Header'
-import NewItems from '../../Components/NewItems'
+import NewItems from '../../Components/Seller/NewItems'
 import RecentlyViewed from '../../Components/RecentlyViewed'
 import StatusOrder from '../../Components/StatusOrder'
 import CategoryHome from '../../Components/CategoryHome'

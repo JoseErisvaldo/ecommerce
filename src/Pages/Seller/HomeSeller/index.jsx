@@ -1,10 +1,6 @@
-import Cards from '../../Components/Cards'
-import Header from '../../Components/Header'
-import NewItems from '../../Components/NewItems'
-import RecentlyViewed from '../../Components/RecentlyViewed'
-import StatusOrder from '../../Components/StatusOrder'
-import CategoryHome from '../../Components/CategoryHome'
-import './style.css'
+import Cards from '../../../Components/Cards';
+import Header from '../../../Components/Header';
+import StatusOrder from '../../../Components/StatusOrder';
 
 export default function HomeSeller() {
 
@@ -18,6 +14,13 @@ export default function HomeSeller() {
             'Promova seus produtos de maneira simples e eficaz. Anuncie agora !!'
           }
           link={'/announce'}
+        />
+        <Cards
+          tittle={'Ver Anúncios'}
+          descripton={
+            'Gerenciar meus anuncios!!'
+          }
+          link={'/managead'}
         />
         <Cards
           tittle={'Agendar'}

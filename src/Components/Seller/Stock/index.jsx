@@ -1,18 +1,18 @@
 import './style.css'
 import React, { useContext, useEffect, useState } from 'react'
-import Header from '../Header'
+import Header from '../../Header'
 import { Link } from 'react-router-dom'
-import BtnArrow from '../Btn/BtnArrow'
+import BtnArrow from '../../Btn/BtnArrow'
 import { FaArrowAltCircleLeft } from "react-icons/fa";
-import ListCategory from '../ListCategory'
-import FilterStock from '../FilterStock'
-import supabaseClient from '../../supabaseClient'
-import { AuthContext } from '../../Contexts/Login'
+import ListCategory from '../../ListCategory'
+import FilterStock from '../../FilterStock'
+import supabaseClient from '../../../supabaseClient'
+import { AuthContext } from '../../../Contexts/Login'
 
 
 export default function Stock () {
   const {user} = useContext(AuthContext)
-  const [userBd, setUserBd] = useState([])
+  const [sellers, setSellers] = useState([])
   const [stock, setStock] = useState([])
   const [listStock, setListStock] = useState([])
 
@@ -20,10 +20,10 @@ export default function Stock () {
     try {
       if(user) {
         const {data, erro} = await supabaseClient
-        .from('users')
+        .from('sellers')
         .select('*')
         .eq('email', user.email)
-        setUserBd(data)
+        setSellers(data)
 
       }
     } catch (error) {
@@ -32,7 +32,7 @@ export default function Stock () {
   }
   async function loadingStock () {
     try {
-      if(userBd) {
+      if(sellers) {
         const {data, erro} = await supabaseClient
         .from('stock')
         .select('*')
@@ -41,25 +41,24 @@ export default function Stock () {
     } catch (error) {
       console.log(`Erro na requisição, stock ${error}`)      
     }
-  }
+  } 
   
   useEffect(() => {
     const mapStock = stock.map((stockItem) => {
-      const filter = userBd.find((userId) => userId.id === stockItem.idseller);
-  
+      const filter = sellers.filter((userId) => userId.id === stockItem.idseller);
       return { ...stockItem, user: filter };
     });
     
-    const resFilter = mapStock.filter(item => item.user != undefined)
+    const resFilter = mapStock.filter(item => item.user != '')
     setListStock(resFilter)
-    console.log(resFilter)
-  }, [stock,userBd])
-  
+  }, [stock,sellers])
+
   useEffect(() => {
     loadingUser () 
     loadingStock ()
    
   },[user])
+  
   return(
     <div>
       <Header />
@@ -70,7 +69,7 @@ export default function Stock () {
       <h1>Gerenciar Estoque</h1>
 
       <div className='container-stock'>
-        <ListCategory/>
+        <ListCategory className='container-category' />
         <div className='card-stock'>
           <FilterStock/>
           <div className='container-card-stock'>
