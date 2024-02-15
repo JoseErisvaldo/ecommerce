@@ -19,7 +19,13 @@ export default function Home() {
           }
           link={'/announce'}
         />
-        
+        <Cards
+          tittle={'Status Agendamento ( Colaborador )'}
+          descripton={
+            'Gerencie todos os agendamentos pendentes'
+          }
+          link={'/statusschedules'}
+        />
         <Cards
           tittle={'Agendar'}
           descripton={
