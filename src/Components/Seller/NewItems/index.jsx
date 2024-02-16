@@ -31,17 +31,21 @@ export default function NewItems({ title, evento, link }) {
           </div>
         </div>
       </Link>
+     
       <div className="container-items">
         {originlock.map(item => (
-          <div className="card-items" key={item.sku}>
-            <div className="card-item-img">
-              <img src={item.photo} alt="imagem" />
+          <Link to={`/products/${item.sku}`} >
+            <div className="card-items" key={item.sku}>
+              <div className="card-item-img">
+                <img src={item.photo} alt="imagem" />
+              </div>
+              <div className="description-item">{item.description}</div>
+              <div>R$ {item.price}</div>
             </div>
-            <div className="description-item">{item.description}</div>
-            <div>R$ {item.price}</div>
-          </div>
+          </Link>
         ))}
       </div>
+
     </div>
   )
 }

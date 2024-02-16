@@ -1,0 +1,5 @@
+.btn-cep {
+  font-size: 20px;
+  color: var(--color-blue);
+  cursor: pointer;
+}
