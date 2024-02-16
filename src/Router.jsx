@@ -16,6 +16,7 @@ import Stock from './Components/Seller/Stock'
 import HomeClient from './Pages/HomeClient'
 import HomeSeller from './Pages/Seller/HomeSeller'
 import ManageAd from './Components/Seller/ManageAd'
+import Products from './Pages/Products'
 
 export default function AppRouter() {
 
@@ -52,6 +53,7 @@ export default function AppRouter() {
           <Route path="/category" element={  <Category />  } />
           <Route path='/cart' element ={ <Cart/> } />
           <Route path='/homeclient' element={ <HomeClient/> } />
+          <Route path='/products/:idParams' element={<Products/>} />
 
           {/*essa rota sera acessado somente os seller*/}
           <Route path="/announce" element={   <Announce />   } />

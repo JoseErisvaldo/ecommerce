@@ -1,0 +1,54 @@
+.container-products {
+  border: 1px solid rgb(224, 224, 224);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 500px;
+  padding: 10px;
+}
+.card-product {
+  /*border: 1px solid rgb(248, 159, 159);*/
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.car-product-img {
+  display: flex;
+  /*border: 1px solid black;*/
+}
+.products-img-center {
+  /*border: 1px solid teal;*/
+  width: 520px;
+}
+.products-img-left {
+  width: 150px;
+  /*border: 1px solid rgb(255, 140, 0);*/
+}
+.card-dados-product {
+  /*border: 1px solid red;*/
+  width: 100%;
+}
+.card-dados-product div {
+  margin: 10px;
+}
+.products-img-center {
+  display: flex;
+  align-items: center;
+  padding: 20px;
+}
+.products-img-center img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 20px;
+}
+.products-cep {
+  display: flex;
+  align-items: center;
+}
+.icon-cep {
+  
+}
+.products-cep input {
+  margin: 0 5px 0 0;
+}
