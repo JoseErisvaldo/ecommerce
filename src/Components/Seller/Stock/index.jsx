@@ -45,8 +45,8 @@ export default function Stock () {
   
   useEffect(() => {
     const mapStock = stock.map((stockItem) => {
-      const filter = sellers.filter((userId) => userId.id === stockItem.idseller);
-      return { ...stockItem, user: filter };
+      const user = sellers.filter((userId) => userId.id === stockItem.idseller);
+      return { ...stockItem, user: user };
     });
     
     const resFilter = mapStock.filter(item => item.user != '')
