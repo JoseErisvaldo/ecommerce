@@ -20,37 +20,71 @@ export default function Schedule() {
   const [schedule, setSchedule] = useState([])
   const [users, setUsers] = useState([])
 
-  async function loadingProducts() {
-    const { data, error } = await supabase.from('products').select('*')
-    setProducts(data)
+  const fetchProducts = () => {
+    return new Promise((resolve, reject) => {
+      supabase
+      .from('products').
+      select('*')
+      .then(({data, error}) => {
+        if(error) {
+          reject(data)
+        } else {
+          resolve(data)
+        }
+      })
+    })
+  }
+  const fetchSchedule = () => {
+    return new Promise((resolve, reject) => {
+      supabase
+      .from('schedule')
+      .select('*')
+      .then(({data, error}) => {
+        if(error) {
+          reject(error)
+        } else {
+          resolve(data)
+        }
+      })
+    })
   }
 
-  async function loadingSchedule() {
-    const { data, error } = await supabase.from('schedule').select('*')
-    setSchedule(data)
+  const fecthSellers = () => {
+    return new Promise((resolve, reject) => {
+      supabase
+      .from('sellers')
+      .select('*')
+      .eq('email', user.email)
+      .then(({data, error}) => {
+        if(error) {
+          reject(error)
+        } else {
+          resolve(data)
+        }
+      })
+    })
   }
-
-  async function loadingUser () {
-    try {
-      const {data, error} = await supabase.from('users').select('*').eq("email" ,user.email)
-      setUsers(data)
-    } catch (error) {
-      console.log(error)
-    }
    
-  }
 
   useEffect(() => {
-    loadingProducts()
-    loadingSchedule()
-    loadingUser ()
-  }, [])
+    if(user) {
+      Promise.all([ fetchProducts(),fetchSchedule(),fecthSellers()])
+      .then(([productsData,scheduleData, sellersData ]) => {
+        setProducts(productsData)
+        setSchedule(scheduleData)
+        setUsers(sellersData)
+      }) 
+    }
+    
+   
+  }, [user])
+  
   const filterUser = users.map(item => {
     return item.id
   })
+  
   const lengthSchedule = schedule.length
-  let array = products.filter(item => item.idSeller == filterUser[0])
-
+  let array = products.filter(item => item.idseller == filterUser[0])
   function selectOption(e) {
     setSku(e.target.value)
     const filterSkuPrice = products
@@ -92,6 +126,7 @@ export default function Schedule() {
       <div className="container-inputs-schedule">
         <select onChange={selectOption} className="select-option">
           {array.map(item => (
+           
             <option key={item.sku} value={item.sku}>
               {item.sku}
             </option>

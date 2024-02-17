@@ -11,41 +11,62 @@ export default function MySchedule () {
   const { user } = useContext(AuthContext);
   const [seller, setSeller] = useState([])
   const [listSchedule, setSchedule] = useState([])
-  async function loadingSchedule () {
-    try {
-      const {data, error} = await supabase
+
+
+  const fechSchedule = () => {
+    return new Promise((resolve, reject) => {
+      supabase
       .from('schedule')
       .select('*')
-      setSchedule(data)
-    } catch (error) {
-      console.log(`Eror na chamada, ${error}`)
-    }
+      .then(({data, error}) => {
+        if(error) {
+          reject(error)
+        } else {
+          resolve(data)
+        }
+      })
+    })
   }
-  async function loadingUser () {
-    if(user && user.email) {
-      try {
-        const {data, error} = await supabase.from('users').select('*').eq("email" ,user.email)
-        setSeller(data)
-      } catch (error) {
-        console.log (error)
-      }
-    }
-    
+
+  const fechtSellers = () => {
+    return new Promise((resolve, reject) => {
+      supabase
+      .from('sellers')
+      .select('*')
+      .eq('email', user.email)
+      .then(({data, error}) => {
+        if(error) {
+          reject(error)
+        } else {
+          resolve(data)
+        }
+      })
+    })
   }
+
   useEffect(() => {
-    loadingSchedule ()
-    loadingUser ()
+    if(user) {
+      Promise.all([fechSchedule(),fechtSellers()])
+      .then(([scheduleData, sellerData]) => {
+        setSchedule(scheduleData)
+
+        setSeller(sellerData)
+        console.log(sellerData)
+      })
+    }
   },[user])
 
-  const idSeller = seller.map(item => {
+  if(user) {
+    
+  }
+  
+  const idSeller =  seller.map(item => {
     return item.id
   })
 
-  if(user && user.email) {
-    
-  }
-  const resSeller = listSchedule.filter(item => item.idSeller == idSeller[0])
-  
+
+  const resSeller = listSchedule.filter(item => item.idseller == idSeller[0])
+
   const countStatusAprovacao = resSeller.filter(item => item.status === 'Aguardando Aprovação para Coleta' ).length
 
   const countStatusColeta = resSeller.filter(item => item.status === 'Aguardando Coleta' ).length
