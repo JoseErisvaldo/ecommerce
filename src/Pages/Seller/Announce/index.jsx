@@ -23,10 +23,11 @@ export default function Announce() {
     if(user) {
       try {
         const {data, error} = await supabase
-        .from('users')
+        .from('sellers')
         .select('*')
         .eq('email' , user.email)
         setSeller(data)
+        console.log(data)
       } catch (error) {
         console.log(error)
       }
@@ -46,7 +47,6 @@ export default function Announce() {
         maximumFractionDigits: 2
       })
       setNumeroFormatado(numeroFormatado)
-      console.log(numeroFormatado)
     } else {
       alert('Este campo deve ser digitado somente numero !!')
     }
@@ -69,7 +69,6 @@ export default function Announce() {
   const onFile = e => {
     let onFile = e.target.files[0]
     setFileInput(onFile)
-    console.log(onFile)
   }
   const onSize = e => {
     let size = e.target.value
@@ -107,21 +106,26 @@ export default function Announce() {
     const url = 'https://kiexzvmtnrgrvlrjsbmp.supabase.co/storage/v1/object/public/imagensitems/'
     try {
       const { data, error } = await supabase
-        .from('products')
-        .insert([
-          {
-            sku: `SKU${resCout + 1}`,
-            description: descriptionInput,
-            idSeller: idSeller[0],
-            photo: url + idSeller[0] + '_' + fileInput.name,
-            size: sizeInput,
-            category: categoryInput,
-            status: 'Ativo',
-            barCode: barCode,
-            price: valor
-          }
-        ])
-        .select()
+      .from('products')
+      .insert([
+        {
+          sku: `SKU${resCout + 1}`,
+          description: descriptionInput,
+          idseller: idSeller[0],
+          photo: url + idSeller[0] + '_' + fileInput.name,
+          size: sizeInput,
+          category: categoryInput,
+          status: 'Ativo',
+          barCode: barCode,
+          price: valor
+        }
+      ]);
+
+    if (error) {
+      console.error('Erro ao inserir no Supabase:', error);
+      // Adicione lógica para lidar com o erro aqui (ex: exibir mensagem de erro)
+      return;
+    }
 
       const {dataImg, errorImg} = await supabase.storage
       .from('imagensitems')
@@ -134,7 +138,6 @@ export default function Announce() {
       setBarCodeInput('')
       setValor('')
       setNumeroFormatado('')
-      console.log(data)
     } catch (error) {
       console.log(error)
     }
