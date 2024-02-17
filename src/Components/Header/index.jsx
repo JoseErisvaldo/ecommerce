@@ -6,6 +6,9 @@ import NameUser from '../NameUser'
 import React, {useContext, useEffect, useState} from 'react'
 import { AuthContext } from '../../Contexts/Login'
 import supabaseClient from '../../supabaseClient'
+import { MdOutlineShoppingCart } from "react-icons/md";
+import { Link } from 'react-router-dom'
+
 
 export default function Header() {
   const {logout, user} = useContext(AuthContext)
@@ -24,10 +27,20 @@ export default function Header() {
     }
     
   }
+  const [localS, setLocalS] = useState([])
+  const local = localStorage.getItem('@cartLojaMais')
+
+  useEffect(() => {
+    const parsedLocalCart = JSON.parse(localStorage.getItem('@cartLojaMais'));
+    setLocalS(parsedLocalCart);
+  }, [local]);
 
   useEffect(() => {
     loadingUser ()
   },[user])
+
+
+
 
   return (
     <div>
@@ -43,6 +56,16 @@ export default function Header() {
           <button onClick={handelLogout} className="btn-card">Sair</button>
         </div>
         <div className="card-menu">
+          <Link to={'/cart'} style={{color: 'var(--color-blue'}}>
+          <div className='cart-header'>
+            {localS ? 
+            <>
+              <div className='count-cart'>{localS && localS.length}</div>
+              <div><MdOutlineShoppingCart/></div>
+            </> : <><div><MdOutlineShoppingCart/></div></>}
+              
+          </div>
+          </Link>
           <div>
             <BsTicketPerforated />
           </div>

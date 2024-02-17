@@ -44,6 +44,22 @@
   justify-content: space-between;
   cursor: pointer;
 }
+.cart-header {
+  display: flex;
+}
+.count-cart {
+  position: absolute;
+  color: black;
+  top: 0px;
+  font-size: 14px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--color-blue);
+  color: var(--color-white);
+  padding: 5px;
+  text-align: center;
+  border-radius: 50px;
+}
 .card-menu div {
   margin: 5px;
 }
