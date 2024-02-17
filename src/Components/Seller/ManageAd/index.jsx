@@ -51,7 +51,6 @@ export default function ManageAd () {
     
     const resFilter = mapStock.filter(item => item.user != '')
     setListStock(resFilter)
-    console.log(resFilter)
   }, [stock,sellers])
 
   useEffect(() => {

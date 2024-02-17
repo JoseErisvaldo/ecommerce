@@ -103,7 +103,7 @@ export default function Stock () {
                       <td>{item.blocked}</td>
                       <td>{item.locktype}</td>
                       <td>{item.originlock}</td>
-                      <td>Ver anuncio</td>
+                      <td><Link to={`/products/${item.sku}`}>Ver Anúncio</Link></td>
                     </tr>
                   ))}
                 </tbody>

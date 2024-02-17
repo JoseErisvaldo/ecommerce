@@ -18,7 +18,7 @@ export default function Schedule() {
   let [priceBd, setPrice] = useState('')
   const [products, setProducts] = useState([])
   const [schedule, setSchedule] = useState([])
-  const [users, setUsers] = useState([])
+  const [sellers, setSellers] = useState([])
 
   const fetchProducts = () => {
     return new Promise((resolve, reject) => {
@@ -72,19 +72,21 @@ export default function Schedule() {
       .then(([productsData,scheduleData, sellersData ]) => {
         setProducts(productsData)
         setSchedule(scheduleData)
-        setUsers(sellersData)
+        setSellers(sellersData)
+        console.log(scheduleData)
       }) 
     }
     
    
   }, [user])
   
-  const filterUser = users.map(item => {
+  const filterUser = sellers.map(item => {
     return item.id
   })
   
   const lengthSchedule = schedule.length
-  let array = products.filter(item => item.idseller == filterUser[0])
+  let array = products.filter(item => item.idseller == filterUser)
+
   function selectOption(e) {
     setSku(e.target.value)
     const filterSkuPrice = products
@@ -108,11 +110,13 @@ export default function Schedule() {
             sku: sku,
             ammount: qtd,
             price: 12,
-            idSeller: filterUser[0],
+            idseller: filterUser[0],
             status: 'Aguardando Aprovação para Coleta'
           }
+
         ])
         .select()
+        console.log(data)
     } catch (error) {
       console.log(error)
     }
